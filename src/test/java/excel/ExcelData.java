@@ -8,17 +8,31 @@ public class ExcelData {
 	static XSSFWorkbook workbook;
 	static XSSFSheet sheet;
 
-	public static void main(String[] args) {
-		getdata();
+	// Constructor to get path n sheetname frome ExcelUtils class
+	public ExcelData(String excelPath, String sheetName) {
+		try {
+
+			workbook = new XSSFWorkbook(excelPath);
+			sheet = workbook.getSheet(sheetName);
+		} catch (Exception exp) {
+			exp.getMessage();
+			exp.getCause();
+			exp.printStackTrace();
+		}
+
 	}
 
-	public static void getdata() {
+//	public static void main(String[] args) {
+//		getdata(0, 0);
+//	}
+	
+	//Using parameters to avoid hardcoding
+	public static void getdata(int rowNum, int colNum) {
 
 		try {
-			projectPath = System.getProperty("user.dir");
-			workbook = new XSSFWorkbook(projectPath + "/Excel/data.xlsx");
-			sheet = workbook.getSheet("Sheet1");
-			String cellData = sheet.getRow(0).getCell(0).getStringCellValue();
+			//Hard coded
+			//sheet.getRow(0).getCell(0).getStringCellValue();
+			String cellData = sheet.getRow(rowNum).getCell(colNum).getStringCellValue();
 			System.out.println(cellData);
 		} catch (Exception exp) {
 			exp.getMessage();
